@@ -1,14 +1,15 @@
 // give the user a nice default project!
 ThisBuild / organization := "$organisation$"
 ThisBuild / scalaVersion := "$scalaVersion$"
-val zhttpVersion = "$zhttpVersion$"
+
+val ZHTTPVersion = "$zhttpVersion$"
 
 lazy val root = (project in file("."))
   .settings(
     name := "$name$",
     libraryDependencies ++=
       Seq(
-        "io.d11" %% "zhttp"      % zhttpVersion
+        "io.d11" %% "zhttp" % ZHTTPVersion
       ),
   )
   .settings(
