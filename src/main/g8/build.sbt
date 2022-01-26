@@ -1,17 +1,13 @@
+import Dependencies._
+
 // give the user a nice default project!
 ThisBuild / organization := "$organisation$"
-ThisBuild / scalaVersion := "$scalaVersion$"
-
-val ZHTTPVersion = "$zhttpVersion$"
 
 lazy val root = (project in file("."))
   .settings(BuildHelper.stdSettings)
   .settings(
     name := "$name$",
-    libraryDependencies ++=
-      Seq(
-        "io.d11" %% "zhttp" % ZHTTPVersion
-      ),
+    libraryDependencies ++= Seq(`zio-http`)
   )
   .settings(
     fork                      := true,

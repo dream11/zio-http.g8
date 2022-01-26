@@ -3,7 +3,7 @@ import sbt.Keys._
 import scalafix.sbt.ScalafixPlugin.autoImport._
 
 object BuildHelper {
-  val Scala213 = "2.13.8"
+  val ScalaVersion = "$scalaVersion$"
 
   def commonSettings(scalaVersion: String) = CrossVersion.partialVersion(scalaVersion) match {
     case Some((3, _))                  => Seq.empty
@@ -11,15 +11,14 @@ object BuildHelper {
     case _                             => Seq.empty
   }
   def stdSettings                          = Seq(
-    ThisBuild / fork               := true,
-    ThisBuild / crossScalaVersions := Seq(Scala213),
-    ThisBuild / scalaVersion       := Scala213,
-    ThisBuild / scalacOptions      := commonSettings(scalaVersion.value),
-    ThisBuild / semanticdbEnabled  := true,
-    ThisBuild / semanticdbVersion  := scalafixSemanticdb.revision,
+    ThisBuild / fork              := true,
+    ThisBuild / scalaVersion      := ScalaVersion,
+    ThisBuild / scalacOptions     := commonSettings(scalaVersion.value),
+    ThisBuild / semanticdbEnabled := true,
+    ThisBuild / semanticdbVersion := scalafixSemanticdb.revision,
     ThisBuild / scalafixDependencies ++=
       List(
-        "com.github.liancheng" %% "organize-imports" % "0.6.0",
+        "com.github.liancheng" %% "organize-imports" % "$organizeImportsVersion$",
       ),
   )
 }
