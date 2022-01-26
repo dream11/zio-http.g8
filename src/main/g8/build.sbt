@@ -10,7 +10,6 @@ lazy val root = (project in file("."))
     libraryDependencies ++= Seq(`zio-http`)
   )
   .settings(
-    fork                      := true,
     Compile / run / mainClass := Option("$package$.$name;format="Camel"$"),
   )
 
