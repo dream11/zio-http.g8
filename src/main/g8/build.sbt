@@ -5,6 +5,7 @@ ThisBuild / scalaVersion := "$scalaVersion$"
 val ZHTTPVersion = "$zhttpVersion$"
 
 lazy val root = (project in file("."))
+  .settings(BuildHelper.stdSettings)
   .settings(
     name := "$name$",
     libraryDependencies ++=
