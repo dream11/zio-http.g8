@@ -9,12 +9,23 @@ lazy val root = (project in file("."))
       val _ = (g8Test in Test).toTask("").value
     },
     scriptedLaunchOpts ++=
-      List("-Xms1024m", "-Xmx1024m", "-XX:ReservedCodeCacheSize=128m", "-Xss2m", "-Dfile.encoding=UTF-8"),
+      List(
+        "-Xms1024m",
+        "-Xmx1024m",
+        "-XX:ReservedCodeCacheSize=128m",
+        "-Xss2m",
+        "-Dfile.encoding=UTF-8",
+      ),
     resolvers +=
-      Resolver.url("typesafe", url("https://repo.typesafe.com/typesafe/ivy-releases/"))(Resolver.ivyStylePatterns),
+      Resolver.url("typesafe", url("https://repo.typesafe.com/typesafe/ivy-releases/"))(
+        Resolver.ivyStylePatterns,
+      ),
   )
 
 addCommandAlias("fmt", "scalafmt; Test / scalafmt; sFix;")
 addCommandAlias("fmtCheck", "scalafmtCheck; Test / scalafmtCheck; sFixCheck")
 addCommandAlias("sFix", "scalafix OrganizeImports; Test / scalafix OrganizeImports")
-addCommandAlias("sFixCheck", "scalafix --check OrganizeImports; Test / scalafix --check OrganizeImports")
+addCommandAlias(
+  "sFixCheck",
+  "scalafix --check OrganizeImports; Test / scalafix --check OrganizeImports",
+)
