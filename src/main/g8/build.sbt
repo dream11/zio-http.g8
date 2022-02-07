@@ -7,7 +7,8 @@ lazy val root = (project in file("."))
   .settings(BuildHelper.stdSettings)
   .settings(
     name := "$name$",
-    libraryDependencies ++= Seq(`zio-http`)
+    testFrameworks += new TestFramework("zio.test.sbt.ZTestFramework"),
+    libraryDependencies ++= Seq(`zio-test`, `zio-test-sbt`, `zio-http`, `zio-http-test`),
   )
   .settings(
     Compile / run / mainClass := Option("$package$.$name;format="Camel"$"),
