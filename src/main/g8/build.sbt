@@ -2,8 +2,10 @@ import Dependencies._
 
 // give the user a nice default project!
 ThisBuild / organization := "$organisation$"
+ThisBuild / version := "$version$"
 
 lazy val root = (project in file("."))
+  .enablePlugins(JavaAppPackaging)
   .settings(BuildHelper.stdSettings)
   .settings(
     name := "$name$",
@@ -11,7 +13,8 @@ lazy val root = (project in file("."))
     libraryDependencies ++= Seq(`zio-test`, `zio-test-sbt`, `zio-http`, `zio-http-test`),
   )
   .settings(
-    Compile / run / mainClass := Option("$package$.$name;format="Camel"$"),
+    Docker / version          := version.value,
+    Compile / run / mainClass := Option("com.example.zhttpservice.ZhttpService"),
   )
 
 addCommandAlias("fmt", "scalafmt; Test / scalafmt; sFix;")
