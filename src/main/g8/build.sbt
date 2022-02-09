@@ -1,20 +1,20 @@
+import Dependencies._
+
 // give the user a nice default project!
 ThisBuild / organization := "$organisation$"
-ThisBuild / scalaVersion := "$scalaVersion$"
-
-val ZHTTPVersion = "$zhttpVersion$"
+ThisBuild / version := "$version$"
 
 lazy val root = (project in file("."))
+  .enablePlugins(JavaAppPackaging)
+  .settings(BuildHelper.stdSettings)
   .settings(
     name := "$name$",
-    libraryDependencies ++=
-      Seq(
-        "io.d11" %% "zhttp" % ZHTTPVersion
-      ),
+    testFrameworks += new TestFramework("zio.test.sbt.ZTestFramework"),
+    libraryDependencies ++= Seq(`zio-test`, `zio-test-sbt`, `zio-http`, `zio-http-test`),
   )
   .settings(
-    fork                      := true,
-    Compile / run / mainClass := Option("$package$.$name;format="Camel"$"),
+    Docker / version          := version.value,
+    Compile / run / mainClass := Option("com.example.zhttpservice.ZhttpService"),
   )
 
 addCommandAlias("fmt", "scalafmt; Test / scalafmt; sFix;")
