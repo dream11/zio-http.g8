@@ -14,7 +14,7 @@ lazy val root = (project in file("."))
   )
   .settings(
     Docker / version          := version.value,
-    Compile / run / mainClass := Option("com.example.zhttpservice.ZhttpService"),
+    Compile / run / mainClass := Option("$package$.$name;format="word,cap"$"),
   )
 
 addCommandAlias("fmt", "scalafmt; Test / scalafmt; sFix;")
