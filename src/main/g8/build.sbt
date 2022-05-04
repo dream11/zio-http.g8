@@ -14,7 +14,7 @@ lazy val root = (project in file("."))
   )
   .settings(
     Docker / version          := version.value,
-    Compile / run / mainClass := Option("$package$.$name;format="word,cap"$"),
+    Compile / run / mainClass := Option("$package$.$name;format="Camel"$"),
   )
 
 addCommandAlias("fmt", "scalafmt; Test / scalafmt; sFix;")
